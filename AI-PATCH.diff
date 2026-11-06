@@ -1,0 +1,14 @@
+--- a/src/main/java/org/springframework/samples/petclinic/owner/PetController.java
++++ b/src/main/java/org/springframework/samples/petclinic/owner/PetController.java
+@@ -127,6 +127,12 @@
+ 			}
+ 		}
+ 
++		LocalDate currentDate = LocalDate.now();
++		if (pet.getBirthDate() != null && pet.getBirthDate().isAfter(currentDate)) {
++			result.rejectValue("birthDate", "typeMismatch.birthDate");
++		}
++
+ 		if (result.hasErrors()) {
+ 			return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
+ 		}
